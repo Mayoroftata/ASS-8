@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <section class="container">
+        <div class="row">
+            <div class="col d-none d-lg-block d-sm-none d-md-none"></div>
+            <div class="col py-2 border-3 shadow mt-5">
+                <h1 class="text-center py-2">Account Sign up</h1>
+                <div>
+                    <div class="input-group flex-nowrap my-3">
+                        <span class="input-group-text" id="addon-wrapping">First Name</span>
+                        <input id="firstName" type="text" class="form-control" placeholder="First name" aria-label="firstName" aria-describedby="addon-wrapping">
+                    </div>
+                    <div class="input-group flex-nowrap my-3">
+                        <span class="input-group-text" id="addon-wrapping">Last Name</span>
+                        <input id="lastName" type="text" class="form-control" placeholder="Last name" aria-label="lastName" aria-describedby="addon-wrapping">
+                    </div>
+                    <div class="input-group flex-nowrap my-3">
+                        <span class="input-group-text" id="addon-wrapping"><img src="./img/email.svg" width="25" alt=""></span>
+                        <input id="email" type="email" class="form-control" placeholder="Email" aria-label="email" aria-describedby="addon-wrapping">
+                    </div>
+                    <div class="input-group flex-nowrap my-3">
+                        <span class="input-group-text" id="addon-wrapping"><img src="./img/password.svg" width="25" alt=""></span>
+                        <input id="password" type="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="addon-wrapping">
+                    </div>
+                    <div class="mb-3 flex-nowrap">
+                        
+                    </div>
+                    <div class="">
+                        <button type="button" class="btn btn-1 rounded-pill btn-primary w-100 fw-bold py-2" id="btnSubmit">Sign Up</button>
+                        
+                    </div>
+                    <div class="text-center text-dark anchor">
+                        <p>Already have an account? <a href="./signin.html" class="text-dark a-1">Sign in</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-none d-lg-block d-sm-none d-md-none"></div>
+        </div>
+</section>
+
+    <script>
+        function toast(message = 'Welcome', color = 'red', duration = 3000) {
+        Toastify({
+            text: message,
+            duration: duration,
+            destination: "https://github.com/apvarun/toastify-js",
+            newWindow: true,
+            close: true,
+            gravity: "top", // top or bottom
+            position: "right", // left, center or right
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+                background: color,
+            },
+            onClick: function () { } // Callback after click
+        }).showToast();
+    }
+
+        let allStudent=[]
+        const btn = document.getElementById('btnSubmit')
+        const fName = document.getElementById('firstName')
+        const lName = document.getElementById('lastName')
+        const mail = document.getElementById('email')
+        const pass = document.getElementById('password')
+        btn.addEventListener('click', ()=>{
+            /*let gottenStudent;
+                let rs = JSON.parse(localStorage.getItem('students'))
+                gottenStudent = rs
+                let found = gottenStudent.find(email=>email.electronicM===mail.value);
+                alert('Already signed up, Proceed to sign in') */
+            if(fName.value === '' || lName.value === '' || mail.value === "" || pass.value === ''){
+                //alert('Fill in the empty spaces')
+                toast('Fill in the empty spaces','red', 3000)
+            } else {
+                console.log(fName.value, lName.value, mail.value, pass.value);
+                const studentData = {
+                    firstN : fName.value,
+                    lastN : lName.value,
+                    electronicM : mail.value,
+                    pin : pass.value
+                }
+                console.log(studentData);
+                allStudent.push(studentData)
+                toast('Registration Successful','green', 2000)
+                localStorage.setItem('students', JSON.stringify(allStudent))
+                setTimeout(()=>{
+                    window.location.href = 'signin.html'
+                }, 2500)
+                console.log(allStudent);
+                fName.value = ''
+                lName.value = ''
+                mail.value = ''
+                pass.value = ''
+            }
+        })
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="bootstrap.js"></script>
+</body>
+</html>
